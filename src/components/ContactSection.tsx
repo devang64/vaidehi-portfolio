@@ -12,6 +12,9 @@ import {
   Send,
   FileDown,
   ExternalLink,
+  Loader2,
+  AlertCircle,
+  CheckCircle2,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon, MediumIcon } from "./icons";
 
@@ -20,12 +23,16 @@ export default function ContactSection() {
 
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [requiresConfigNotice, setRequiresConfigNotice] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "DevOps Engineer Role Inquiry",
     message: "",
+    honeypot: "",
   });
 
   const handleCopyEmail = async () => {
@@ -48,10 +55,42 @@ export default function ContactSection() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-    setFormSubmitted(true);
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return;
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+    setRequiresConfigNotice(false);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setFormSubmitted(true);
+      } else if (data.requiresConfig) {
+        setRequiresConfigNotice(true);
+      } else {
+        setErrorMessage(
+          data.error || "Unable to send your message automatically. Please reach out via direct email."
+        );
+      }
+    } catch (err) {
+      console.error("Submission failed", err);
+      setErrorMessage(
+        "Network error connecting to email service. Please try emailing directly or try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -215,32 +254,93 @@ export default function ContactSection() {
               </p>
 
               {formSubmitted ? (
-                <div className="p-8 rounded-xl bg-emerald-50 border border-emerald-300 text-center space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 border border-emerald-400 flex items-center justify-center text-emerald-700 mx-auto">
-                    <Check className="w-6 h-6" />
+                <div className="p-8 rounded-xl bg-emerald-50 border border-emerald-300 text-center space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-emerald-100 border border-emerald-400 flex items-center justify-center text-emerald-700 mx-auto shadow-xs">
+                    <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h4 className="text-lg font-bold text-slate-900">Message Received!</h4>
-                  <p className="text-sm text-slate-700 max-w-md mx-auto">
-                    Thank you for reaching out, {formData.name}. I will review your message and get back
-                    to you at {formData.email} promptly.
+                  <h4 className="text-xl font-bold text-slate-900">Message Delivered to Vaidehi&apos;s Inbox!</h4>
+                  <p className="text-sm text-slate-700 max-w-md mx-auto leading-relaxed">
+                    Thank you for reaching out, <span className="font-semibold text-slate-900">{formData.name}</span>. Your message has been forwarded directly to <span className="font-mono text-cyan-800 font-semibold">{personal.email}</span>. Vaidehi will review your inquiry and reply to <span className="font-semibold text-slate-900">{formData.email}</span> promptly.
                   </p>
                   <button
                     onClick={() => {
                       setFormSubmitted(false);
+                      setRequiresConfigNotice(false);
+                      setErrorMessage(null);
                       setFormData({
                         name: "",
                         email: "",
                         subject: "DevOps Engineer Role Inquiry",
                         message: "",
+                        honeypot: "",
                       });
                     }}
-                    className="mt-4 px-4 py-2 text-xs font-mono font-bold rounded-lg bg-white border border-slate-300 text-cyan-700 hover:bg-slate-50 cursor-pointer shadow-xs"
+                    className="mt-4 px-5 py-2.5 text-xs font-mono font-bold rounded-xl bg-white border border-slate-300 text-cyan-700 hover:bg-slate-50 cursor-pointer shadow-xs transition-colors"
                   >
                     Send Another Message
                   </button>
                 </div>
+              ) : requiresConfigNotice ? (
+                <div className="p-6 rounded-xl bg-amber-50 border border-amber-300 text-center space-y-4">
+                  <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-400 flex items-center justify-center text-amber-700 mx-auto">
+                    <AlertCircle className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-lg font-bold text-slate-900">Email Configuration Notice</h4>
+                  <p className="text-xs sm:text-sm text-slate-700 max-w-md mx-auto leading-relaxed">
+                    Server email forwarding credentials (<code className="font-mono bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-bold">EMAIL_USER</code> &amp; <code className="font-mono bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-bold">EMAIL_PASS</code>) are not yet configured in the deployment environment.
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
+                    You can immediately send your message by opening your default email application with this inquiry pre-filled:
+                  </p>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <a
+                      href={`mailto:${personal.email}?subject=${encodeURIComponent(formData.subject || "DevOps Engineer Inquiry")}&body=${encodeURIComponent(`Hi Vaidehi,\n\n${formData.message}\n\nBest regards,\n${formData.name}\n${formData.email}`)}`}
+                      className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-bold text-xs sm:text-sm shadow-sm hover:from-cyan-500 hover:to-teal-500 transition-all text-center"
+                    >
+                      <Mail className="w-4 h-4" />
+                      <span>Open Pre-filled Email to {personal.email}</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setRequiresConfigNotice(false)}
+                      className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
+                    >
+                      Back to Edit Form
+                    </button>
+                  </div>
+                </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  {/* Anti-spam Honeypot (hidden from human visitors) */}
+                  <input
+                    type="text"
+                    name="contact_bot_field"
+                    value={formData.honeypot}
+                    onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                    style={{ display: "none" }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+
+                  {errorMessage && (
+                    <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs sm:text-sm flex items-start space-x-3">
+                      <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                      <div className="flex-1 space-y-1">
+                        <p className="font-semibold">{errorMessage}</p>
+                        <p className="text-xs text-red-700">
+                          You can also reach out directly to{" "}
+                          <a
+                            href={`mailto:${personal.email}?subject=${encodeURIComponent(formData.subject || "Inquiry")}`}
+                            className="font-bold underline hover:text-red-950"
+                          >
+                            {personal.email}
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-xs font-mono text-slate-600 font-bold mb-1">
@@ -250,10 +350,11 @@ export default function ContactSection() {
                         id="name"
                         type="text"
                         required
+                        disabled={isSubmitting}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Jane Doe"
-                        className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all shadow-xs"
+                        className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all shadow-xs disabled:opacity-50"
                       />
                     </div>
 
@@ -265,10 +366,11 @@ export default function ContactSection() {
                         id="email"
                         type="email"
                         required
+                        disabled={isSubmitting}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="jane@company.com"
-                        className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all shadow-xs"
+                        className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all shadow-xs disabled:opacity-50"
                       />
                     </div>
                   </div>
@@ -280,9 +382,10 @@ export default function ContactSection() {
                     <input
                       id="subject"
                       type="text"
+                      disabled={isSubmitting}
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all shadow-xs"
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all shadow-xs disabled:opacity-50"
                     />
                   </div>
 
@@ -294,19 +397,30 @@ export default function ContactSection() {
                       id="message"
                       rows={5}
                       required
+                      disabled={isSubmitting}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Hi Vaidehi, we are looking for a DevOps Engineer with your AWS and Terraform expertise..."
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all resize-none shadow-xs"
+                      placeholder="Hi Vaidehi, we are looking for a DevOps Engineer with your AWS, Terraform, and CI/CD expertise..."
+                      className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all resize-none shadow-xs disabled:opacity-50"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center space-x-2 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white font-bold text-sm shadow-md shadow-cyan-600/20 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full flex items-center justify-center space-x-2 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white font-bold text-sm shadow-md shadow-cyan-600/20 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Send Message Directly</span>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
+                        <span>Sending Message to Vaidehi...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Send Message Directly</span>
+                      </>
+                    )}
                   </button>
                 </form>
               )}
