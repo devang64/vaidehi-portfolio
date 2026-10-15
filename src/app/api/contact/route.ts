@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     const recipient = process.env.CONTACT_RECEIVER || "vaidehisavaliya8@gmail.com";
     const emailUser = process.env.EMAIL_USER || process.env.GMAIL_USER;
     const emailPass = process.env.EMAIL_PASS || process.env.GMAIL_APP_PASSWORD;
-    const web3formsKey = process.env.WEB3FORMS_ACCESS_KEY;
+    const web3formsKey = process.env.WEB3FORMS_ACCESS_KEY || "2e7b358f-4d88-4fc8-8ded-f009b955480d";
 
     // 1. Try sending via Nodemailer (Gmail / SMTP)
     if (emailUser && emailPass) {

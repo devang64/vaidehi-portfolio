@@ -26,7 +26,6 @@ export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [requiresConfigNotice, setRequiresConfigNotice] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -61,32 +60,37 @@ export default function ContactSection() {
 
     setIsSubmitting(true);
     setErrorMessage(null);
-    setRequiresConfigNotice(false);
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          access_key: "2e7b358f-4d88-4fc8-8ded-f009b955480d",
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim() || `[Portfolio] DevOps Role Inquiry from ${formData.name.trim()}`,
+          message: formData.message.trim(),
+          from_name: "Vaidehi Portfolio Website",
+        }),
       });
 
       const data = await res.json();
 
-      if (res.ok && data.success) {
+      if (data.success) {
         setFormSubmitted(true);
-      } else if (data.requiresConfig) {
-        setRequiresConfigNotice(true);
       } else {
         setErrorMessage(
-          data.error || "Unable to send your message automatically. Please reach out via direct email."
+          data.message || "Unable to deliver message automatically. Please reach out via email directly."
         );
       }
     } catch (err) {
       console.error("Submission failed", err);
       setErrorMessage(
-        "Network error connecting to email service. Please try emailing directly or try again."
+        "Network error sending message. Please try again or email directly."
       );
     } finally {
       setIsSubmitting(false);
@@ -265,7 +269,6 @@ export default function ContactSection() {
                   <button
                     onClick={() => {
                       setFormSubmitted(false);
-                      setRequiresConfigNotice(false);
                       setErrorMessage(null);
                       setFormData({
                         name: "",
@@ -280,47 +283,32 @@ export default function ContactSection() {
                     Send Another Message
                   </button>
                 </div>
-              ) : requiresConfigNotice ? (
-                <div className="p-6 rounded-xl bg-amber-50 border border-amber-300 text-center space-y-4">
-                  <div className="w-12 h-12 rounded-full bg-amber-100 border border-amber-400 flex items-center justify-center text-amber-700 mx-auto">
-                    <AlertCircle className="w-6 h-6" />
-                  </div>
-                  <h4 className="text-lg font-bold text-slate-900">Email Configuration Notice</h4>
-                  <p className="text-xs sm:text-sm text-slate-700 max-w-md mx-auto leading-relaxed">
-                    Server email forwarding credentials (<code className="font-mono bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-bold">EMAIL_USER</code> &amp; <code className="font-mono bg-amber-100 px-1 py-0.5 rounded text-amber-900 font-bold">EMAIL_PASS</code>) are not yet configured in the deployment environment.
-                  </p>
-                  <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
-                    You can immediately send your message by opening your default email application with this inquiry pre-filled:
-                  </p>
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                    <a
-                      href={`mailto:${personal.email}?subject=${encodeURIComponent(formData.subject || "DevOps Engineer Inquiry")}&body=${encodeURIComponent(`Hi Vaidehi,\n\n${formData.message}\n\nBest regards,\n${formData.name}\n${formData.email}`)}`}
-                      className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 text-white font-bold text-xs sm:text-sm shadow-sm hover:from-cyan-500 hover:to-teal-500 transition-all text-center"
-                    >
-                      <Mail className="w-4 h-4" />
-                      <span>Open Pre-filled Email to {personal.email}</span>
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => setRequiresConfigNotice(false)}
-                      className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
-                    >
-                      Back to Edit Form
-                    </button>
-                  </div>
-                </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Anti-spam Honeypot (hidden from human visitors) */}
+                <form
+                  action="https://api.web3forms.com/submit"
+                  method="POST"
+                  onSubmit={handleSubmit}
+                  className="space-y-4"
+                >
+                  {/* Web3Forms Access Key for direct email delivery to Vaidehi */}
                   <input
-                    type="text"
-                    name="contact_bot_field"
-                    value={formData.honeypot}
-                    onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                    type="hidden"
+                    name="access_key"
+                    value="2e7b358f-4d88-4fc8-8ded-f009b955480d"
+                  />
+                  <input
+                    type="hidden"
+                    name="from_name"
+                    value="Vaidehi Portfolio Website"
+                  />
+                  {/* Anti-spam honeypot */}
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    className="hidden"
                     style={{ display: "none" }}
                     tabIndex={-1}
                     autoComplete="off"
-                    aria-hidden="true"
                   />
 
                   {errorMessage && (
