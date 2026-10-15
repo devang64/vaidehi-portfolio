@@ -8,7 +8,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vaidehisavaliya.dev"),
+  metadataBase: new URL("https://vaidehi-portfolio-bay.vercel.app"),
   title: "Vaidehi Savaliya | DevOps Engineer & AWS Certified Solutions Architect",
   description:
     "DevOps Engineer with 1.5+ years of hands-on experience in CI/CD automation (Jenkins, GitHub Actions, AWS CodePipeline), AWS infrastructure, Terraform IaC, Docker, ECS, and EKS. AWS Certified Solutions Architect – Associate.",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://vaidehisavaliya.dev",
+    url: "https://vaidehi-portfolio-bay.vercel.app",
     title: "Vaidehi Savaliya | DevOps Engineer & AWS Certified Solutions Architect",
     description:
       "Explore the portfolio, cloud projects, and infrastructure automation expertise of Vaidehi Savaliya. AWS Certified Solutions Architect – Associate.",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://vaidehisavaliya.dev",
+    canonical: "https://vaidehi-portfolio-bay.vercel.app",
   },
 };
 

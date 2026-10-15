@@ -56,7 +56,7 @@ export const portfolioData = {
     linkedin: "https://www.linkedin.com/in/vaidehisavaliya8/",
     github: "https://github.com/VaidehiSavaliya",
     medium: "https://medium.com/@vaidehisavaliya8",
-    website: "https://vaidehisavaliya.dev",
+    website: "https://vaidehi-portfolio-bay.vercel.app",
     status: "Open to DevOps & Cloud Opportunities",
     metrics: [
       { label: "Experience", value: "1.5+ Yrs", detail: "CI/CD & Cloud Infrastructure" },

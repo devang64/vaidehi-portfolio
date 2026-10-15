@@ -11,6 +11,16 @@ export const metadata: Metadata = {
   title: "Resume | Vaidehi Savaliya - DevOps Engineer",
   description:
     "Official resume of Vaidehi Savaliya. DevOps Engineer with 1.5+ years of experience in CI/CD, AWS, Terraform, Docker, ECS, and EKS. AWS Certified Solutions Architect – Associate.",
+  alternates: {
+    canonical: "https://vaidehi-portfolio-bay.vercel.app/resume",
+  },
+  openGraph: {
+    title: "Resume | Vaidehi Savaliya - DevOps Engineer",
+    description:
+      "Official resume of Vaidehi Savaliya. DevOps Engineer with 1.5+ years of experience in CI/CD, AWS, Terraform, Docker, ECS, and EKS.",
+    url: "https://vaidehi-portfolio-bay.vercel.app/resume",
+    type: "profile",
+  },
   robots: {
     index: true,
     follow: true,

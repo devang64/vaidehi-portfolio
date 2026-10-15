@@ -13,6 +13,7 @@ export default function JsonLd() {
     sameAs: [
       portfolioData.personal.linkedin,
       portfolioData.personal.github,
+      portfolioData.personal.medium,
     ],
     knowsAbout: [
       "DevOps",
