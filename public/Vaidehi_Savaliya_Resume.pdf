@@ -1,0 +1,118 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 4 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 7 0 R >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 8 0 R >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+7 0 obj
+<< /Length 3179 >>
+stream
+BT /F1 18 Tf 54 745 Td (VAIDEHI SAVALIYA) Tj ET
+BT /F1 11 Tf 54 728 Td (DevOps Engineer | AWS Certified Solutions Architect - Associate) Tj ET
+BT /F2 8.5 Tf 54 713 Td (Email: vaidehisavaliya8@gmail.com  |  Phone: +91 8849906237  |  Surat, India) Tj ET
+BT /F2 8.5 Tf 54 701 Td (LinkedIn: linkedin.com/in/vaidehisavaliya8  |  GitHub: github.com/VaidehiSavaliya) Tj ET
+0.5 0.5 0.5 RG 1.5 w 54 690 m 558 690 l S
+BT /F1 11 Tf 54 674 Td (PROFILE) Tj ET
+0.7 0.7 0.7 RG 0.5 w 54 669 m 558 669 l S
+BT /F2 9 Tf 54 654 Td (DevOps Engineer with 1.5+ years of hands-on experience in CI/CD automation, AWS infrastructure, and container deployments.) Tj ET
+BT /F2 9 Tf 54 641 Td (Built and maintained pipelines with Jenkins, GitHub Actions, and AWS CodePipeline, provisioned infrastructure with Terraform,) Tj ET
+BT /F2 9 Tf 54 628 Td (and ran containerized applications on Docker, Amazon ECS, and Amazon EKS. AWS Certified Solutions Architect - Associate,) Tj ET
+BT /F2 9 Tf 54 615 Td (with a strong base in Linux and Bash scripting.) Tj ET
+BT /F1 11 Tf 54 594 Td (PROFESSIONAL EXPERIENCE) Tj ET
+0.7 0.7 0.7 RG 0.5 w 54 589 m 558 589 l S
+BT /F1 10 Tf 54 574 Td (Junior DevOps Engineer) Tj ET
+BT /F2 9 Tf 440 574 Td (Feb 2026 - Oct 2026) Tj ET
+BT /F2 9.5 Tf 54 560 Td (Autotroph Infotech  -  Surat, India) Tj ET
+BT /F2 8.5 Tf 64 545 Td (\(bull\)  Built and maintained CI/CD pipelines in AWS CodePipeline to automate application deployments.) Tj ET
+BT /F2 8.5 Tf 64 532 Td (\(bull\)  Deployed and managed containerized applications with Docker on Amazon ECS and Amazon EKS.) Tj ET
+BT /F2 8.5 Tf 64 519 Td (\(bull\)  Monitored infrastructure and application performance using Prometheus, Grafana, and Amazon CloudWatch.) Tj ET
+BT /F2 8.5 Tf 64 506 Td (\(bull\)  Configured IAM users, roles, and policies, and supported Linux and Windows Server environments.) Tj ET
+BT /F1 10 Tf 54 487 Td (DevOps Engineer) Tj ET
+BT /F2 9 Tf 440 487 Td (May 2025 - Jan 2026) Tj ET
+BT /F2 9.5 Tf 54 473 Td (Rejoicehub LLP  -  Surat, India) Tj ET
+BT /F2 8.5 Tf 64 458 Td (\(bull\)  Improved CI/CD workflows in Jenkins and GitHub Actions, making deployments faster and more reliable.) Tj ET
+BT /F2 8.5 Tf 64 445 Td (\(bull\)  Supported 20+ application releases across AWS, DigitalOcean, and Contabo while optimizing cloud resource usage.) Tj ET
+BT /F2 8.5 Tf 64 432 Td (\(bull\)  Designed and provisioned secure, scalable AWS infrastructure with Terraform.) Tj ET
+BT /F2 8.5 Tf 64 419 Td (\(bull\)  Wrote Bash scripts to automate deployments, monitoring, and routine infrastructure tasks.) Tj ET
+BT /F1 10 Tf 54 400 Td (AWS Cloud Intern) Tj ET
+BT /F2 9 Tf 440 400 Td (Jul 2024 - Oct 2024) Tj ET
+BT /F2 9.5 Tf 54 386 Td (F13 Technologies  -  India) Tj ET
+BT /F2 8.5 Tf 64 371 Td (\(bull\)  Designed AWS architectures using EC2, S3, RDS, Lambda, and API Gateway.) Tj ET
+BT /F2 8.5 Tf 64 358 Td (\(bull\)  Assisted in migrating on-premises applications to AWS to improve performance and lower infrastructure costs.) Tj ET
+BT /F2 8.5 Tf 64 345 Td (\(bull\)  Prepared architecture and configuration documentation in line with AWS best practices.) Tj ET
+BT /F2 8 Tf 260 25 Td (Page 1 of 2  -  Vaidehi Savaliya Resume) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Length 2927 >>
+stream
+BT /F1 11 Tf 54 745 Td (TECHNICAL SKILLS) Tj ET
+0.7 0.7 0.7 RG 0.5 w 54 740 m 558 740 l S
+BT /F1 8.5 Tf 54 727 Td (CI/CD:) Tj ET
+BT /F2 8.5 Tf 190 727 Td (Jenkins, GitHub Actions, AWS CodePipeline, Git) Tj ET
+BT /F1 8.5 Tf 54 713 Td (Containers & Orchestration:) Tj ET
+BT /F2 8.5 Tf 190 713 Td (Docker, Kubernetes, Amazon ECS, Amazon EKS) Tj ET
+BT /F1 8.5 Tf 54 699 Td (Infrastructure as Code:) Tj ET
+BT /F2 8.5 Tf 190 699 Td (Terraform, AWS CloudFormation) Tj ET
+BT /F1 8.5 Tf 54 685 Td (AWS Cloud:) Tj ET
+BT /F2 8.5 Tf 190 685 Td (EC2, S3, IAM, VPC, ALB, Lambda, RDS, CloudFront, CloudTrail, Route53, Secret Manager) Tj ET
+BT /F1 8.5 Tf 54 671 Td (Monitoring:) Tj ET
+BT /F2 8.5 Tf 190 671 Td (Prometheus, Grafana, Amazon CloudWatch) Tj ET
+BT /F1 8.5 Tf 54 657 Td (Operating Systems & Scripting:) Tj ET
+BT /F2 8.5 Tf 190 657 Td (Linux (Ubuntu/Debian/RHEL), Windows Server, Bash) Tj ET
+BT /F1 8.5 Tf 54 643 Td (Soft Skills:) Tj ET
+BT /F2 8.5 Tf 190 643 Td (Communication, Teamwork, Problem-Solving, Leadership) Tj ET
+BT /F1 11 Tf 54 621 Td (PROJECTS) Tj ET
+0.7 0.7 0.7 RG 0.5 w 54 616 m 558 616 l S
+BT /F1 10 Tf 54 603 Td (Infrastructure Automation \(AWS & Terraform\)) Tj ET
+BT /F2 8.5 Tf 64 590 Td (\(bull\)  Automated a complete AWS setup with Terraform, covering VPC, subnets, security groups, EC2, and an Application Load Balancer.) Tj ET
+BT /F2 8.5 Tf 64 577 Td (\(bull\)  Improved consistency and reduced deployment errors through Infrastructure as Code.) Tj ET
+BT /F1 10 Tf 54 560 Td (CI/CD Automation Framework \(AWS, Jenkins & Docker\)) Tj ET
+BT /F2 8.5 Tf 64 547 Td (\(bull\)  Built an automated CI/CD pipeline for a two-tier application using Jenkins and Docker on AWS.) Tj ET
+BT /F2 8.5 Tf 64 534 Td (\(bull\)  Increased release frequency and made deployments reliable and repeatable.) Tj ET
+BT /F1 11 Tf 54 513 Td (CERTIFICATES) Tj ET
+0.7 0.7 0.7 RG 0.5 w 54 508 m 558 508 l S
+BT /F1 9.5 Tf 54 495 Td (AWS Certified Solutions Architect - Associate) Tj ET
+BT /F2 9 Tf 400 495 Td (Amazon Web Services \(AWS\)) Tj ET
+BT /F2 8.5 Tf 64 482 Td (\(bull\)  Validated ability to design secure, scalable and cost-efficient cloud architectures using AWS best practices.) Tj ET
+BT /F1 9.5 Tf 54 466 Td (AWS Certified Cloud Practitioner) Tj ET
+BT /F2 9 Tf 400 466 Td (Amazon Web Services \(AWS\)) Tj ET
+BT /F2 8.5 Tf 64 453 Td (\(bull\)  Gained foundational knowledge of AWS services, cloud security, billing and basic architecture.) Tj ET
+BT /F1 11 Tf 54 433 Td (EDUCATION) Tj ET
+0.7 0.7 0.7 RG 0.5 w 54 428 m 558 428 l S
+BT /F1 9.5 Tf 54 415 Td (Bachelor of Computer Application) Tj ET
+BT /F2 9 Tf 440 415 Td (2021 - 2024) Tj ET
+BT /F2 9 Tf 54 401 Td (Sutex Bank College of Computer Applications & Science - Surat, India) Tj ET
+BT /F2 8.5 Tf 64 387 Td (\(bull\)  Awarded the MYSY Scholarship, a merit-based recognition given to promising students.) Tj ET
+BT /F2 8 Tf 260 25 Td (Page 2 of 2  -  Vaidehi Savaliya Resume) Tj ET
+endstream
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000257 00000 n 
+0000000393 00000 n 
+0000000468 00000 n 
+0000000538 00000 n 
+0000003769 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+6748
+%%EOF
