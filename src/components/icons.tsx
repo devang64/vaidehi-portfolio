@@ -1,5 +1,39 @@
 import React from "react";
 
+export function VLogoIcon({ className = "w-10 h-10" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <defs>
+        <linearGradient id="v-logo-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#0284c7" />
+          <stop offset="0.5" stopColor="#0d9488" />
+          <stop offset="1" stopColor="#4f46e5" />
+        </linearGradient>
+      </defs>
+      <rect width="40" height="40" rx="10" fill="url(#v-logo-grad)" />
+      <rect
+        x="0.75"
+        y="0.75"
+        width="38.5"
+        height="38.5"
+        rx="9.25"
+        stroke="#ffffff"
+        strokeOpacity="0.3"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M11 12H16.5L20 22.5L23.5 12H29L22.5 28H17.5L11 12Z"
+        fill="#ffffff"
+      />
+    </svg>
+  );
+}
+
 export function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
     <svg

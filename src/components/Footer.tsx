@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { portfolioData } from "@/data/portfolio-data";
 import { ArrowUp, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon, MediumIcon } from "./icons";
+import { GithubIcon, LinkedinIcon, MediumIcon, VLogoIcon } from "./icons";
 
 export default function Footer() {
   const { personal } = portfolioData;
@@ -10,13 +10,9 @@ export default function Footer() {
     <footer className="border-t border-slate-200 bg-white py-12 no-print relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-100">
-          {/* Brand Info with VS logo */}
+          {/* Brand Info with V logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-indigo-600 p-[1.5px] shadow-xs">
-              <div className="w-full h-full bg-white rounded-[9px] flex items-center justify-center font-black text-transparent bg-clip-text bg-gradient-to-tr from-cyan-600 to-indigo-600 text-xs italic tracking-tighter">
-                V
-              </div>
-            </div>
+            <VLogoIcon className="w-9 h-9 rounded-xl shadow-xs shrink-0" />
             <div>
               <span className="font-extrabold text-slate-900">{personal.name}</span>
               <p className="text-xs text-slate-500 font-mono">

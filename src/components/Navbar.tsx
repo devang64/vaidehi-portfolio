@@ -10,6 +10,7 @@ import {
   Search,
   ChevronDown,
 } from "lucide-react";
+import { VLogoIcon } from "./icons";
 
 interface NavbarProps {
   onOpenCommandPalette: () => void;
@@ -44,11 +45,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
             href="/"
             className="flex items-center space-x-3 group focus:outline-none focus:ring-2 focus:ring-cyan-500 rounded-lg p-1"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 via-teal-600 to-indigo-600 p-[2px] shadow-sm group-hover:scale-105 transition-transform duration-200">
-              <div className="w-full h-full bg-white rounded-[9px] flex items-center justify-center font-black text-transparent bg-clip-text bg-gradient-to-tr from-cyan-600 to-indigo-600 text-base italic tracking-tighter">
-                V
-              </div>
-            </div>
+            <VLogoIcon className="w-10 h-10 rounded-xl shadow-xs group-hover:scale-105 transition-transform duration-200 shrink-0" />
             <div>
               <span className="font-extrabold text-slate-900 tracking-tight text-base sm:text-lg group-hover:text-cyan-600 transition-colors">
                 Vaidehi Savaliya
